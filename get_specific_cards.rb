@@ -31,3 +31,4 @@ def http_get(url, options={})
 end
 
 puts http_get(URL, OPTIONS)
+puts "hello"
