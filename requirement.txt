@@ -1,0 +1,17 @@
+RAILS_ENV=production rake db:setup
+# produces the error below.....hmmm.....it's a no-worky
+psql:/yourprojectpath/yourproject/db/structure.sql:29: ERROR:  could not open extension control file "/usr/share/postgresql/9.1/extension/hstore.control": No such file or directory
+
+# hstore postgresql extension needs to be installed, so....
+sudo apt-get install postgresql-contrib
+
+# now your extension should be available to enable so log in with psql
+psql -d yourproject_production -U yourdbuser -W
+
+# in the psql shell
+CREATE EXTENSION hstore;
+\q
+
+# now you're golden, may need to clean up and re-run
+RAILS_ENV=production rake db:drop
+RAILS_ENV=production rake db:setup
